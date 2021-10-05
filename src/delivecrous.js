@@ -30,14 +30,16 @@ app.put("/cart", async (req,res) => {
         .catch(() => res.status(404).end())
 })
 
-// Suppression du panier
+// TODO : ajout d'un article au panier
+
+// Suppression d'un article du panier (incorrect)
 app.delete("/cart/:id", async (req,res) => {
     Panier.findByIdAndDelete(req.params.id)
         .then((panier) => res.json(panier))
         .catch(() => res.status(404).end())
 })
 
-// Afficher liste article du panier
+// Afficher liste article(s) du panier
 app.get("/cart/:id", async (req, res) => {
     Panier.findById(req.params.id)
         .then((panier) => res.json(panier["plats"]))
