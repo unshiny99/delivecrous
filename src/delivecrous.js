@@ -28,6 +28,21 @@ const Client = mongoose.model("Client", {
     prenom : String
 })
 
+// afficher tous les plats
+app.get("/dishes", async (req,res) => {
+    Plat.find()
+        .then((plats) => res.json(plats))
+        .catch(() => res.status(404).end())
+})
+
+// afficher un plat par ID
+app.get("/dishes/:id", async (req,res) => {
+    Plat.findById(req.params.id)
+        .then((plat) => res.json(plat))
+        .catch(() => res.status(404).end())
+})
+
+// route par défaut
 app.get("*", (req, res) => {
     res.status(404).end()
     console.log("error 404")
