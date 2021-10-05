@@ -18,7 +18,7 @@ const Plat = mongoose.model("Plat", {
 const Panier = mongoose.model("Panier", {
     id_panier : Number,
     id_plat : Number,
-    id_client : Number
+    id_client : Number,
 })
 
 const Client = mongoose.model("Client", {
