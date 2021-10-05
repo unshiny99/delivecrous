@@ -42,6 +42,18 @@ app.get("/dishes/:id", async (req,res) => {
         .catch(() => res.status(404).end())
 })
 
+app.put("/cart", async (req,res) => {
+    Panier.findByIdAndUpdate(req.params.id, req.body)
+        .then((panier) => res.json(panier))
+        .catch(() => res.status(404).end())
+})
+
+app.delete("/cart/:id", async (req,res) => {
+    Panier.findByIdAndDelete(req.params.id)
+        .then((panier) => res.json(panier))
+        .catch(() => res.status(404).end())
+})
+
 // route par défaut
 app.get("*", (req, res) => {
     res.status(404).end()
