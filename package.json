@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/delivecrous.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   "homepage": "https://gitlab.com/JoJo-fr/fisa_3_delivecrous_auzou#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^6.0.9"
+    "mongoose": "^6.0.9",
+    "nodemon": "^2.0.13"
   },
   "devDependencies": {
     "body-parser": "^1.19.0"
