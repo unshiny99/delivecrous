@@ -22,7 +22,6 @@ const Client = mongoose.model("Client", {
 })
 
 const Plat = mongoose.model("Plat", PlatSchema)
-
 const Panier = mongoose.model("Panier", PanierSchema)
 
 const panier_1_save = new Panier({
@@ -165,3 +164,5 @@ plat_5_save.save()
 panier_1_save.save()
 panier_2_save.save()
 panier_3_save.save()
+
+module.exports = {Plat, Client, Panier}

@@ -1,22 +1,23 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const { Plat } = require("../data_generate/data");
+const { Plat, Panier, Client } = require("../data_generate/data");
 
 const app = express();
+
 app.use(bodyParser.json());
 
 mongoose.connect("mongodb://localhost:27017/delivecrous");
 
 // afficher tous les plats
-app.get("/dishes", async (req,res) => {
+app.get("/plats", async (req, res) => {
     Plat.find()
         .then((plats) => res.json(plats))
         .catch(() => res.status(404).end())
 })
 
 // afficher un plat par ID
-app.get("/dishes/:id", async (req,res) => {
+app.get("/dishes/:id", async (req, res) => {
     Plat.findById(req.params.id)
         .then((plat) => res.json(plat))
         .catch(() => res.status(404).end())
