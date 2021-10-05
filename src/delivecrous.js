@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
 const { Plat, Panier, Client } = require("../data_generate/data");
 
 const app = express();
@@ -17,7 +18,7 @@ app.get("/plats", async (req, res) => {
 })
 
 // afficher un plat par ID
-app.get("/dishes/:id", async (req, res) => {
+app.get("/plats/:id", async (req, res) => {
     Plat.findById(req.params.id)
         .then((plat) => res.json(plat))
         .catch(() => res.status(404).end())
