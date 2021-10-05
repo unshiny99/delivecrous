@@ -10,8 +10,8 @@ mongoose.connect("mongodb://localhost:27017/delivecrous");
 const Plat = mongoose.model("Plat", {
     nom : String,
     description : String,
-    prix : float,
-    allergene : string
+    prix : Number,
+    allergene : String
 })
 
 app.get("*", (req, res) => {
