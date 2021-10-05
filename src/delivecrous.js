@@ -22,12 +22,14 @@ app.get("/dishes/:id", async (req,res) => {
         .catch(() => res.status(404).end())
 })
 
+// mise à jour du panier
 app.put("/cart", async (req,res) => {
     Panier.findByIdAndUpdate(req.params.id, req.body)
         .then((panier) => res.json(panier))
         .catch(() => res.status(404).end())
 })
 
+// suppression du panier
 app.delete("/cart/:id", async (req,res) => {
     Panier.findByIdAndDelete(req.params.id)
         .then((panier) => res.json(panier))
