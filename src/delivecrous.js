@@ -2,7 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const { Plat, Panier, Client } = require("../data_generate/data");
+const {Panier, Plat} = require('./models/panier');
+const Client = require('./models/client');
+//require("../data_generate/data") // comment this line after you've added the data
+const panier = new Panier({"id_panier" : 1});
+panier.save();
 
 
 const app = express();
@@ -11,10 +15,9 @@ app.use(bodyParser.json());
 mongoose.connect("mongodb://localhost:27017/delivecrous");
 
 // Afficher tous les plats
-// semble renvoyer plusieurs fois le même plat
-app.get("/dishes", async (req,res) => {
+app.get("/dishes", async (req, res) => {
     Plat.find()
-        .then((plats) => res.json(plats))
+        .then(plats => res.status(200).json(plats))
         .catch(() => res.status(404).end())
 })
 
@@ -36,31 +39,35 @@ app.put("/cart", async (req,res) => {
 
 // ajout d'un article au panier
 app.post("/cart/:id", async (req,res) => {
-    Panier.findOne({id_panier : req.params.id})
-        .then((panier) => res.json(panier))
-        .catch(() => res.status(404).end())
+    const plat = await Plat.findOne({id_plat : req.params.id}); 
+    panier.plats.push(plat);
+    Panier.findOneAndUpdate({id_panier : 1}, panier)
+        .then(() => res.json(panier))
+        .catch(() => res.status(404).end());
 })
 
 // Suppression d'un article du panier
 app.delete("/cart/:id", async (req,res) => {
-    Panier.findOne({id_panier : req.params.id})
-        .then((panier) => res.json(panier))
+    const plat = await Plat.findOne({id_plat : req.params.id}); 
+    panier.plats.remove(plat);
+    Panier.findOneAndUpdate({id_panier : 1}, panier)
+        .then(() => res.json(panier))
         .catch(() => res.status(404).end())
 })
 
 // Afficher liste article(s) du panier
-app.get("/cart/:id", async (req, res) => {
-    Panier.findOne({id_panier : req.params.id})
-        .then((panier) => res.json(panier["plats"]))
+app.get("/cart", async (req, res) => {
+    Panier.find()
+        .then((panier) => res.json(panier))
         .catch(() => res.status(404).end())
 })
 
-
+// gérer l'adresse du client (A FAIRE)
 
 // Route par défaut
 app.get("*", (req, res) => {
     res.status(404).end()
-    console.log("error 404")
+    //console.log("error 404")
 })
 
 app.listen(8000);
