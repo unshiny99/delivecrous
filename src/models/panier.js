@@ -10,7 +10,10 @@ const PlatSchema = new mongoose.Schema({
 
 const PanierSchema = new mongoose.Schema({
     id_panier : Number,
-    plats : [ PlatSchema ]
+    plats : [ PlatSchema ],
+    rue : String,
+    code_postal : String,
+    ville : String
 })
 
 const Plat = mongoose.model('Plat', PlatSchema)

@@ -3,11 +3,11 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 // Import jwt for API's endpoints authentication
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 
 const {Panier, Plat} = require('./models/panier');
 const Client = require('./models/client');
-//require("../data_generate/data") // comment this line after you've added the data
+// require("../data_generate/data") // comment this line after you've added the data
 
 const app = express();
 app.use(bodyParser.json());
@@ -64,7 +64,16 @@ app.get("/cart", async (req, res) => {
         .catch(() => res.status(404).end())
 })
 
-// TODO : gérer l'adresse du client (A FAIRE)
+// Gérer l'adresse du client
+app.put("/cart", async (req, res) => {
+    const panier = await Panier.findOne({id_panier : 1});
+    Panier.updateOne(panier, {
+        "rue": req.body.rue,
+        "code_postal": req.body.code_postal,
+        "ville": req.body.ville
+    }).then(() => res.json(panier))
+    .catch(() => res.status(404).end())
+})
 
 // Route par défaut
 app.get("*", (req, res) => {

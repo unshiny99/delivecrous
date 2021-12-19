@@ -64,8 +64,11 @@ const plat5_save =
 
 const panier = new Panier({
     "id_panier" : 1,
-    "plats": []
-})
+    "plats": [],
+    "rue": "",
+    "ville": "",
+    "code_postal": ""
+    });
 
 //client_1_save.save()
 /*
