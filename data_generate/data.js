@@ -1,4 +1,4 @@
-const {Panier, Plat} = require('../src/models/panier');
+const {Plat, Panier} = require('../src/models/panier');
 const Client = require('../src/models/client');
 
 let clients = [
