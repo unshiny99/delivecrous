@@ -1,32 +1,26 @@
 const {Panier, Plat} = require('../src/models/panier');
 const Client = require('../src/models/client');
 
-/*
-const client_1_save = new Client({
+let clients = [
+    {
     "_id" : 1,
-    "id_panier" : 1,
+    //"id_panier" : 1,
     "nom" : "Dupont",
-    "prenom" : "Joe"
-})
-*/
-
-/*
-const client_2_save = new Client({
+    "prenom" : "Joe",
+    },
+    {
     "_id" : 2,
-    "id_client" : 2,
-    "id_panier" : 2,
+    //"id_panier" : 2,
     "nom" : "Riccart",
-    "prenom" : "Didier"
-})
-
-const client_3_save = new Client({
+    "prenom" : "Didier",
+    },
+    {
     "_id" : 3,
-    "id_client" : 3,
-    "id_panier" : 3,
+    //"id_panier" : 3,
     "nom" : "Robert",
-    "prenom" : "Bernard"
-})
-*/
+    "prenom" : "Bernard",
+    }
+];
 
 const plat1_save = 
     new Plat({
