@@ -5,9 +5,6 @@ const mongoose = require("mongoose");
 const {Panier, Plat} = require('./models/panier');
 const Client = require('./models/client');
 //require("../data_generate/data") // comment this line after you've added the data
-const panier = new Panier({"id_panier" : 1});
-panier.save();
-
 
 const app = express();
 app.use(bodyParser.json());
@@ -39,6 +36,7 @@ app.put("/cart", async (req,res) => {
 
 // ajout d'un article au panier
 app.post("/cart/:id", async (req,res) => {
+    const panier = await Panier.findOne({id_panier : 1});
     const plat = await Plat.findOne({id_plat : req.params.id}); 
     panier.plats.push(plat);
     Panier.findOneAndUpdate({id_panier : 1}, panier)
@@ -48,6 +46,7 @@ app.post("/cart/:id", async (req,res) => {
 
 // Suppression d'un article du panier
 app.delete("/cart/:id", async (req,res) => {
+    const panier = await Panier.findOne({id_panier : 1});
     const plat = await Plat.findOne({id_plat : req.params.id}); 
     panier.plats.remove(plat);
     Panier.findOneAndUpdate({id_panier : 1}, panier)
