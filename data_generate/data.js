@@ -70,12 +70,6 @@ const panier = new Panier({
     "code_postal": ""
     });
 
-//client_1_save.save()
-/*
-client_2_save.save()
-client_3_save.save()
-*/
-
 plat1_save.save() 
 plat2_save.save() 
 plat3_save.save() 
@@ -83,6 +77,13 @@ plat4_save.save()
 plat5_save.save() 
 
 panier.save()
+
+/*
+client_1_save.save()
+client_2_save.save()
+client_3_save.save()
+*/
+
 /*
 panier_2_save.save()
 panier_3_save.save()

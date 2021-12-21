@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 // Import jwt for API's endpoints authentication
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 const {Panier, Plat} = require('./models/panier');
 const Client = require('./models/client');
@@ -71,14 +71,14 @@ app.put("/cart", async (req, res) => {
         "rue": req.body.rue,
         "code_postal": req.body.code_postal,
         "ville": req.body.ville
-    }).then(() => res.json(panier))
-    .catch(() => res.status(404).end())
+    })
+        .then(() => res.json(panier))
+        .catch(() => res.status(404).end())
 })
 
 // Route par défaut
 app.get("*", (req, res) => {
     res.status(404).end()
-    //console.log("error 404")
 })
 
 app.listen(8000);
