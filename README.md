@@ -19,8 +19,8 @@ npm install -g jsonwebtoken
     - suppresion d'un articles du panier
 * /cart [GET]
     - affichages liste article(s) du panier
-* /cart [PUT]
-    - Gerer l'adresse du client
+* /cart_validation [PUT]
+    - Gerer l'adresse du client et valider commande
     - Exemple :
 ```
 {

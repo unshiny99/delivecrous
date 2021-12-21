@@ -93,16 +93,29 @@ app.get("/cart", async (req, res) => {
 })
 
 // Gérer l'adresse du client
-app.put("/cart", async (req, res) => {
-    const panier = await Panier.findOne({id_panier : 1});
-    Panier.updateOne(panier, {
-        "rue": req.body.rue,
-        "code_postal": req.body.code_postal,
-        "ville": req.body.ville
-    })
-        .then(() => res.json(panier))
-        .catch(() => res.status(404).end())
+app.put("/cart_validation", async (req, res) => {
+    Panier.findOne({id_panier : 1}, 
+        function(err, panier){
+            if(err) throw res.status(404).end();
+            if(panier && req.body.rue != "" && req.body.code_postal != "" && req.body.ville){
+                Panier.updateOne(panier, {
+                "rue": req.body.rue,
+                "code_postal": req.body.code_postal,
+                "ville": req.body.ville
+                })
+                .then(() => res.json({"message" : "commande prise en compte avec succé"}))
+                .catch(() => res.status(404).end())
+            }else{
+                res.send(JSON.stringify({
+                    error : "Veillez à bien renseigner toutes les informations avant de valider votre commande."
+                }))
+            }
+        }
+    );
 })
+
+
+app.get
 
 // Route par défaut
 app.get("*", (req, res) => {
