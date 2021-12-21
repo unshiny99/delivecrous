@@ -69,11 +69,20 @@ app.post("/cart/:id", async (req,res) => {
 // Suppression d'un article du panier
 app.delete("/cart/:id", async (req,res) => {
     const panier = await Panier.findOne({id_panier : 1});
-    const plat = await Plat.findOne({id_plat : req.params.id}); 
-    panier.plats.remove(plat);
-    Panier.findOneAndUpdate({id_panier : 1}, panier)
-        .then(() => res.json(panier))
-        .catch(() => res.status(404).end())
+    Plat.findOne({id_plat : req.params.id}, 
+        function(err, plat){
+            if(err) throw res.status(404).end();
+            if(plat){
+                panier.plats.remove(plat);
+                Panier.findOneAndUpdate({id_panier : 1}, panier)
+                .then(() => res.json(panier))
+                .catch(() => res.status(404).end())
+            }else{
+                res.send(JSON.stringify({
+                    error : "le plat n'éxiste pas dans la data base"
+                }))
+            }
+        }); 
 })
 
 // Afficher liste article(s) du panier
