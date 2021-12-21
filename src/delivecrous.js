@@ -25,13 +25,13 @@ app.get("/dishes", async (req, res) => {
 app.get("/dish/:id", async (req, res) => {
     Plat.findOne({id_plat : req.params.id },
         function(err, plat){
-            if (err) throw err;
+            if (err) throw res.status(404).end();
             if (plat){
-                res.status(200).json(plat)
+                res.status(200).json(plat);
             }else{
-            res.send(JSON.stringify({
-                error : "n'existe pas"
-                }))
+                res.send(JSON.stringify({
+                        error : "le plat n'éxiste pas dans la data base"
+                    }))
             }
         }
     )
@@ -49,11 +49,21 @@ app.put("/cart", async (req,res) => {
 // ajout d'un article au panier
 app.post("/cart/:id", async (req,res) => {
     const panier = await Panier.findOne({id_panier : 1});
-    const plat = await Plat.findOne({id_plat : req.params.id}); 
-    panier.plats.push(plat);
-    Panier.findOneAndUpdate({id_panier : 1}, panier)
-        .then(() => res.json(panier))
-        .catch(() => res.status(404).end());
+    Plat.findOne({id_plat : req.params.id}, 
+        function(err, plat){
+            if(err) throw res.status(404).end();
+            if(plat){
+                panier.plats.push(plat);
+                Panier.findOneAndUpdate({id_panier : 1}, panier)
+                .then(() => res.json(panier))
+                .catch(() => res.status(404).end());
+            }else{
+                res.send(JSON.stringify({
+                    error : "le plat n'éxiste pas dans la data base"
+                }))
+            }
+        }
+    ); 
 })
 
 // Suppression d'un article du panier
