@@ -23,9 +23,18 @@ app.get("/dishes", async (req, res) => {
 
 // Afficher un plat par ID
 app.get("/dish/:id", async (req, res) => {
-    Plat.findOne({id_plat : req.params.id })
-        .then((plat) => res.json(plat))
-        .catch(() => res.status(404).end())
+    Plat.findOne({id_plat : req.params.id },
+        function(err, plat){
+            if (err) throw err;
+            if (plat){
+                res.status(200).json(plat)
+            }else{
+            res.send(JSON.stringify({
+                error : "n'existe pas"
+                }))
+            }
+        }
+    )
 })
 
 // Mise à jour du panier
@@ -60,7 +69,7 @@ app.delete("/cart/:id", async (req,res) => {
 // Afficher liste article(s) du panier
 app.get("/cart", async (req, res) => {
     Panier.find()
-        .then((panier) => res.json(panier))
+        .then((panier) => res.status(200).json(panier))
         .catch(() => res.status(404).end())
 })
 
