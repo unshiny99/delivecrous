@@ -1,3 +1,10 @@
+// connection to DB
+const mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost:27017/delivecrous");
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 const {Plat, Panier} = require('../src/models/panier');
 const Client = require('../src/models/client');
 
@@ -70,21 +77,25 @@ const panier = new Panier({
     "code_postal": ""
     });
 
-plat1_save.save() 
-plat2_save.save() 
-plat3_save.save() 
-plat4_save.save() 
-plat5_save.save() 
+async function saveElements() {
+    
+    plat1_save.save() 
+    plat2_save.save() 
+    plat3_save.save() 
+    plat4_save.save() 
+    plat5_save.save() 
 
-panier.save()
+    panier.save()
+}
+
+db.once('open', function() {
+    // we're connected!
+    console.log("connected")
+    saveElements()
+});
 
 /*
 client_1_save.save()
 client_2_save.save()
 client_3_save.save()
-*/
-
-/*
-panier_2_save.save()
-panier_3_save.save()
 */
