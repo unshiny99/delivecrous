@@ -1,12 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
-// Import jwt for API's endpoints authentication
 const jwt = require('jsonwebtoken');
 
 const {Panier, Plat} = require('./models/panier');
 const Client = require('./models/client');
+const { callbackify } = require("util");
+const res = require("express/lib/response");
 
 TOKEN_SECRET = require('crypto').randomBytes(64).toString('hex');
 
@@ -15,12 +15,30 @@ app.use(bodyParser.json());
 
 mongoose.connect("mongodb://localhost:27017/delivecrous");
 
+// Génération du token
 function generateAccessToken(username) {
     return jwt.sign(username, 
                     TOKEN_SECRET, 
-                    { expiresIn: '1800s' });
+                    { expiresIn: '60s'});
 }
 
+// Vérification de la validité du token
+function verifyToken(username, token){
+    return jwt.verify(token, TOKEN_SECRET, (err, decoded) => { 
+        if(err){
+            return {'status': err['message']}
+        }else{
+            return {'status': "accepte"};
+        }
+     });
+}
+
+// Fonction de test : Verify token
+app.post("/test", async (req, res) => {
+    res.json(verifyToken(req.body.username, req.body.token));
+})
+
+// Login et génération du token
 app.post("/login", async (req, res) => {
     const token = generateAccessToken({username: req.body.username});
     res.json(token);
