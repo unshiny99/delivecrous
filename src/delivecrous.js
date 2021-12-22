@@ -7,12 +7,25 @@ const jwt = require('jsonwebtoken');
 
 const {Panier, Plat} = require('./models/panier');
 const Client = require('./models/client');
+
+TOKEN_SECRET = require('crypto').randomBytes(64).toString('hex');
 // require("../data_generate/data") // comment this line after you've added the data
 
 const app = express();
 app.use(bodyParser.json());
 
 mongoose.connect("mongodb://localhost:27017/delivecrous");
+
+function generateAccessToken(username) {
+    return jwt.sign(username, 
+                    TOKEN_SECRET, 
+                    { expiresIn: '1800s' });
+}
+
+app.post("/login", async (req, res) => {
+    const token = generateAccessToken({username: req.body.username});
+    res.json(token);
+})
 
 // Afficher tous les plats
 app.get("/dishes", async (req, res) => {
@@ -113,9 +126,6 @@ app.put("/cart_validation", async (req, res) => {
         }
     );
 })
-
-
-app.get
 
 // Route par défaut
 app.get("*", (req, res) => {
