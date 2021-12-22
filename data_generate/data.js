@@ -1,3 +1,6 @@
+const {Plat, Panier} = require('../src/models/panier');
+const Client = require('../src/models/client');
+
 // connection to DB
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost:27017/delivecrous");
@@ -5,25 +8,22 @@ mongoose.connect("mongodb://localhost:27017/delivecrous");
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-const {Plat, Panier} = require('../src/models/panier');
-const Client = require('../src/models/client');
-
 let clients = [
     {
     "_id" : 1,
-    //"id_panier" : 1,
+    "username" : "joe_dupont",
     "nom" : "Dupont",
     "prenom" : "Joe",
     },
     {
     "_id" : 2,
-    //"id_panier" : 2,
+    "username" : "didier_riccart",
     "nom" : "Riccart",
     "prenom" : "Didier",
     },
     {
     "_id" : 3,
-    //"id_panier" : 3,
+    "username" : "bernard_robert",
     "nom" : "Robert",
     "prenom" : "Bernard",
     }
@@ -85,6 +85,11 @@ async function saveElements() {
     plat4_save.save() 
     plat5_save.save() 
 
+    clients.forEach(client => {
+        let cl = new Client(client);
+        cl.save();
+    });
+
     panier.save()
 }
 
@@ -93,9 +98,3 @@ db.once('open', function() {
     console.log("connected")
     saveElements()
 });
-
-/*
-client_1_save.save()
-client_2_save.save()
-client_3_save.save()
-*/

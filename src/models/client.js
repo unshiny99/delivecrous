@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 
 const Client = mongoose.model('Client', {
-    id_client : Number,
-    id_panier : Number,
+    _id : Number,
+    username : String,
     nom : String,
-    prenom : String,
-    password: String
+    prenom : String
 })
 
 module.exports = Client;
