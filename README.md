@@ -14,6 +14,8 @@ npm install -g jsonwebtoken
 *       affichage de tous les plats
 `/dish/:id` [GET]
 *       affichage d'un plat par id
+`/dish/findByName/:name` [GET]
+*       affichage d'un plat par son nom
 `/cart/:id` [POST]
 *       ajout d'un article au panier
 `/cart/:id` [DELETE]
@@ -21,7 +23,7 @@ npm install -g jsonwebtoken
 `/cart` [GET]
 *       affichage liste article(s) du panier
 `/cart_validation` [PUT]
-*       Gérer l'adresse du client et valider commande
+*       Gérer l'adresse du client et valider sa commande
     - Exemple :
     ```
     {
@@ -31,7 +33,7 @@ npm install -g jsonwebtoken
     }
     ```
 `/*` [GET]
-    - Route par défaut
+*       Route par défaut
 
 
 ## BD
