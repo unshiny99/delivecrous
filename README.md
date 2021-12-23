@@ -19,7 +19,7 @@ npm install -g jsonwebtoken
 `/cart/:id` [POST]
 *       ajout d'un article au panier
 `/cart/:id` [DELETE]
-*       suppresion d'un article du panier
+*       suppression d'un article du panier
 `/cart` [GET]
 *       affichage liste article(s) du panier
 `/cart_validation` [PUT]
