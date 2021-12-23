@@ -63,3 +63,5 @@ npm install -g jsonwebtoken
 set la variable d'environnement `token` avec le token renvoyer lors du login
 ```
 ![login sur postman](src/images/login_postman.PNG)
+
+![gif](https://media.giphy.com/media/w6WcjPfP3z0JWpk8XV/giphy.gif)
