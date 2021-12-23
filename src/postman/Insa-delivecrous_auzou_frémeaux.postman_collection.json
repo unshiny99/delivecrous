@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0f1b24ce-c312-402d-b67c-e00857e36d3d",
+		"_postman_id": "3eadaec8-035b-4225-91ee-c6ae3c704f53",
 		"name": "Insa-SID",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -87,19 +87,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}/dish/Frite?nom=Frite",
+					"raw": "{{server}}/dish/findByName/Frite",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
 						"dish",
+						"findByName",
 						"Frite"
-					],
-					"query": [
-						{
-							"key": "nom",
-							"value": "Frite"
-						}
 					]
 				}
 			},

@@ -22,7 +22,7 @@ function generateAccessToken(username) {
     return jwt.sign(
         username, 
         TOKEN_SECRET, 
-        { expiresIn: '60s'}
+        { expiresIn: '300s'}
     );
 }
 
@@ -85,12 +85,12 @@ app.get("/dish/:id", verifyToken, async (req, res) => {
 })
 
 // afficher un plat par son nom (fixture challenge)
-app.get("/dish/:nom", verifyToken, async (req, res) => {
+app.get("/dish/findByName/:nom", verifyToken, async (req, res) => {
     Plat.findOne({nom : req.params.nom },
         function(err, plat){
             if (err) throw res.status(404).end();
             if (plat) {
-                // res.status(200).json(plat);
+                res.status(200).json(plat);
             } else {
                 res.send(JSON.stringify({
                     error : "le plat n'existe pas dans la data base"

@@ -35,7 +35,7 @@ npm install -g jsonwebtoken
 
 
 ## BD
-*    adresse de la base de donnée par défaut :
+*    adresse de la base de données par défaut :
     
 ```
     mongodb://localhost:27017/delivecrous
@@ -43,23 +43,26 @@ npm install -g jsonwebtoken
 
 ## Documentation
 * Pour l'initialisation du projet (peuplage de la BDD), lancer la commande suivante : `node data_generate/data`
-* visualiser sur MongoDBCompass ou MongoSH si c'est bien peuplé, puis tuer ce processus.
+* Visualiser sur MongoDBCompass ou MongoSH si c'est bien peuplé, puis tuer ce processus.
 * Lancer le projet principal avec la commande : `node src/delivecrous`.
-* Enfin, rendez vous sur le site localhost:8000/[API_ROUTE], en remplaçant [API_ROUTE] par l'un des chemins spécifiés au dessus (pour les requêtes GET)
-* Pour les autres, utilisez directement Postman, avec le fichier de requêtes fourni
+* Connectez-vous via l'API fournie avec un des noms d'utilisateur : [POST] localhost:8000/login (nous vous conseillons Postman) et récupérez le token.
+* Enfin, utilisez directement Postman, avec le fichier de requêtes fourni, pour lancer les requêtes souhaitées.
+* Note : vous ne pourrez pas utiliser votre navigateur pour les requêtes GET car le token d'authorisation vous sera demandé.
 
 ## Postman
-* `Lien vers le fichier postman`
+* Lien vers le fichier postman :
 ```
 ./postman/Insa-delivecrous_auzou_frémeaux.postman_collection.json
 ```
 
-* init variable sur postman
-
+* Initialisation du serveur de test (et de son port) et du token sur postman (une seule fois pour toutes les requêtes)
+```
+Cliquer directement sur le nom de la collection, vous devriez avoir l'onglet "Variables"
+```
 ![init_variable_env_postman](src/images/init_variable_env_postman.PNG)
 
-* login sur postman
+* S'authentifier via Postman (route `/login`)
 ```
-set la variable d'environnement `token` avec le token renvoyer lors du login
+Configurer la variable d'environnement "token" avec le token renvoyé lors du login
 ```
 ![login sur postman](src/images/login_postman.PNG)
