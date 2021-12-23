@@ -37,10 +37,10 @@ npm install -g jsonwebtoken
 
 
 ## BD
-*    adresse de la base de données par défaut :
+*       adresse de la base de données par défaut :
     
 ```
-    mongodb://localhost:27017/delivecrous
+mongodb://localhost:27017/delivecrous
 ```     
 
 ## Documentation
