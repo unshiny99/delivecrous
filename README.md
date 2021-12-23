@@ -35,7 +35,10 @@ npm install -g jsonwebtoken
 
 
 ## BD
-*    à compléter
+*    adresse de la base de donnée par défaut :
+```
+-   mongodb://localhost:27017/delivecrous
+```     
 
 ## Documentation
 * Pour l'initialisation du projet (peuplage de la BDD), lancer la commande suivante : `node data_generate/data`

@@ -52,7 +52,7 @@ app.post("/login", async (req, res) => {
         if(err) throw res.status(404).end();
         if(client) {
             const token = generateAccessToken({username: req.body.username});
-            res.json(token);
+            res.json({"tokenAccess":token});
         } else {
             res.send(JSON.stringify({
                 error : "le client n'existe pas dans la data base"
