@@ -29,45 +29,43 @@ let clients = [
     }
 ];
 
-const plat1_save = 
-    new Plat({
+let plats = [
+    {
         "id_plat" : 1,
         "nom" : "kebab",
         "description" : "kebab complet",
         "prix" : 5,
-        "allergene" : "Aucun"});
-const plat2_save = 
-    new Plat({
+        "allergene" : "Aucun"
+    },
+    {
         "id_plat" : 2,
         "nom" : "Poisson deluxe",
         "description" : "poisson de multiple origine",
         "prix" : 15,
         "allergene" : "Aucun"
-    });
-const plat3_save =
-    new Plat({
+    },
+    {
         "id_plat" : 3,
         "nom" : "Frite",
         "description" : "Frites",
         "prix" : 3,
         "allergene" : "Aucun"
-    });
-const plat4_save =
-    new Plat({
+    },
+    {
         "id_plat" : 4,
         "nom" : "Menu Enfant",
         "description" : "Menu Enfant, contient : Frites, wrap, boisson",
         "prix" : 10,
         "allergene" : "Aucun"
-    });
-const plat5_save =
-    new Plat({
+    },
+    {
         "id_plat" : 5,
         "nom" : "Browl Asiatique",
         "description" : "bowl complet asiatique",
         "prix" : 18,
         "allergene" : "Aucun"
-    });
+    }
+]
 
 const panier = new Panier({
     "id_panier" : 1,
@@ -78,12 +76,10 @@ const panier = new Panier({
     });
 
 async function saveElements() {
-    
-    plat1_save.save() 
-    plat2_save.save() 
-    plat3_save.save() 
-    plat4_save.save() 
-    plat5_save.save() 
+    plats.forEach(plat => {
+        let pl = new Plat(plat);
+        pl.save();
+    });
 
     clients.forEach(client => {
         let cl = new Client(client);
