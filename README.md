@@ -11,33 +11,34 @@ npm install -g jsonwebtoken
 
 ## Routes API
 `/dishes` [GET] 
-    - affichage de tous les plats
+*       affichage de tous les plats
 `/dish/:id` [GET]
-    - affichage d'un plat par id
+*       affichage d'un plat par id
 `/cart/:id` [POST]
-    - ajout d'un article au panier
+*       ajout d'un article au panier
 `/cart/:id` [DELETE]
-    - suppresion d'un article du panier
+*       suppresion d'un article du panier
 `/cart` [GET]
-    - affichage liste article(s) du panier
+*       affichage liste article(s) du panier
 `/cart_validation` [PUT]
-    - Gérer l'adresse du client et valider commande
+*       Gérer l'adresse du client et valider commande
     - Exemple :
-```
-{
-    "rue" : "test",
-    "code_postal": "autre",
-    "ville": "Valenciennnes"
-}
-```
+    ```
+    {
+        "rue" : "test",
+        "code_postal": "autre",
+        "ville": "Valenciennnes"
+    }
+    ```
 `/*` [GET]
     - Route par défaut
 
 
 ## BD
 *    adresse de la base de donnée par défaut :
+    
 ```
--   mongodb://localhost:27017/delivecrous
+    mongodb://localhost:27017/delivecrous
 ```     
 
 ## Documentation
@@ -48,4 +49,17 @@ npm install -g jsonwebtoken
 * Pour les autres, utilisez directement Postman, avec le fichier de requêtes fourni
 
 ## Postman
-* à compléter (éventuellement mettre le lien vers le fichier JSON finalisé qui sera sur le repo)
+* `Lien vers le fichier postman`
+```
+./postman/Insa-delivecrous_auzou_frémeaux.postman_collection.json
+```
+
+* init variable sur postman
+
+![init_variable_env_postman](src/images/init_variable_env_postman.PNG)
+
+* login sur postman
+```
+set la variable d'environnement `token` avec le token renvoyer lors du login
+```
+![login sur postman](src/images/login_postman.PNG)
